@@ -1,0 +1,98 @@
+<section
+  class="services"
+  {% if section.settings.ids != '' and section.settings.ids != null %}
+    id="{{section.settings.ids}}"
+  {% endif %}
+>
+  <div class="services-inner page-width">
+    <h2 class="services-title h1 rte {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      {{ section.settings.title }}
+    </h2>
+    <div class="services-desc">
+      {{ section.settings.description }}
+    </div>
+    <ul class="services-list">
+      {%- for block in section.blocks -%}
+        <li class="services-item">
+          <h3 class="services-subtitle" {{ block.shopify_attributes }}>{{ block.settings.title }}</h3>
+          <div class="services-sublist" {{ block.shopify_attributes }}>
+            {{ block.settings.link_label }}
+          </div>
+
+          <button class="services-arrow">
+            <svg>
+              <use href="#arrow-icon">
+            </svg>
+          </button>
+        </li>
+      {%- endfor -%}
+    </ul>
+    <div class="services-subdesc">
+      {{ section.settings.description2 }}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "services",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "blocks": [
+    {
+      "type": "column",
+      "name": "t:sections.multicolumn.blocks.column.name",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "default": "t:sections.multicolumn.blocks.column.settings.title.default",
+          "label": "t:sections.multicolumn.blocks.column.settings.title.label"
+        },
+        {
+          "type": "richtext",
+          "id": "link_label",
+          "label": "t:sections.multicolumn.blocks.column.settings.link_label.label"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "default": "Services",
+      "label": "t:sections.multicolumn.settings.title.label"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:sections.rich-text.blocks.buttons.settings.button_label_1.label"
+    },
+    {
+      "type": "richtext",
+      "id": "description2",
+      "label": "t:sections.rich-text.blocks.buttons.settings.button_label_1.label"
+    },
+    {
+      "type": "text",
+      "id": "ids",
+      "label": "Anchor"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.multicolumn.presets.name",
+      "blocks": [
+        {
+          "type": "column"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

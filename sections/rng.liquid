@@ -1,0 +1,97 @@
+{{ 'section-rng.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="rng"
+  {% if section.settings.ids != '' and section.settings.ids != null %}
+    id="{{section.settings.ids}}"
+  {% endif %}
+>
+  <div class="rng-inner page-width">
+    <div class="rng-left">
+      <div class="rng-title h1 services-title {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        {{ section.settings.title }}
+      </div>
+
+      <div class="rng-subtitle">{{ section.settings.description }}</div>
+
+      <form action="#" class="rng-form">
+        <input type="text" name="name" required placeholder="First Name *">
+        <input type="text" name="lastname" required placeholder="Last Name *">
+        <input class="col-span-2" type="text" name="company" required placeholder="Company name *">
+        <input class="col-span-2" type="email" name="email" required placeholder="Email *">
+        <input class="col-span-2" type="tel" name="tel" required placeholder="Phone Number *">
+        <button type="submit" class="rng-submit">download Digest PDF</button>
+      </form>
+    </div>
+    <div class="rng-right">
+      <div class="rng-block">
+        <div class="rng-text">{{ section.settings.subtitle }}</div>
+        <div class="rng-desc-2">{{ section.settings.description2 }}</div>
+
+        <div class="rng-line">
+          <div class="rng-date">{{ section.settings.date }}</div>
+          <div class="rng-subdesc">{{ section.settings.company }}</div>
+        </div>
+        {% if section.settings.image %}
+          <div class="rng-img">
+            {{ section.settings.image | image_url: width: 406 | image_tag }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "rng",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "default": "RNG Digest",
+      "label": "t:sections.multicolumn.settings.title.label"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description 1"
+    },
+    {
+      "type": "richtext",
+      "id": "description2",
+      "label": "Description 2"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "text",
+      "id": "date",
+      "label": "Date"
+    },
+    {
+      "type": "text",
+      "id": "company",
+      "label": "Company name"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.multicolumn.blocks.column.settings.image.label"
+    },
+    {
+      "type": "text",
+      "id": "ids",
+      "label": "Anchor"
+    }
+  ]
+}
+{% endschema %}

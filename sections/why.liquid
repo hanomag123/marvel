@@ -1,0 +1,99 @@
+{{ 'section-why.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="why"
+  {% if section.settings.ids != '' and section.settings.ids != null %}
+    id="{{section.settings.ids}}"
+  {% endif %}
+>
+  <div class="why-inner page-width">
+    <h2 class="why-title h1 rich-text__heading {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      {{ section.settings.title }}
+    </h2>
+
+    <div class="why-wrapper">
+      <div class="why-desc">{{ section.settings.description }}</div>
+      <div class="why-desc-2">{{ section.settings.description2 }}</div>
+    </div>
+
+    <div class="why-blocks">
+      <div class="why-subtitle">{{ section.setting.subtitle }}</div>
+      <ol class="why-list">
+        {% for block in section.blocks %}
+          <li class="why-item" {{ block.shopify_attributes }}>
+            {{ block.settings.text }}
+          </li>
+        {% endfor %}
+      </ol>
+    </div>
+
+    <div class="why-desc-3">{{ section.settings.description3 }}</div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "why",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "blocks": [
+    {
+      "type": "column",
+      "name": "t:sections.multicolumn.blocks.column.name",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "default": "Why Work With Us",
+      "label": "t:sections.multicolumn.settings.title.label"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "richtext",
+      "id": "description2",
+      "label": "Description2"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "richtext",
+      "id": "description3",
+      "label": "Description 4"
+    },
+    {
+      "type": "text",
+      "id": "ids",
+      "label": "Anchor"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.multicolumn.presets.name",
+      "blocks": [
+        {
+          "type": "column"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

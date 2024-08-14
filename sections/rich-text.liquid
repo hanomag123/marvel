@@ -14,7 +14,12 @@
   }
 {%- endstyle -%}
 
-<div class="isolate{% unless section.settings.full_width %} page-width{% endunless %}">
+<div
+  class="isolate{% unless section.settings.full_width %} page-width{% endunless %}"
+  {% if section.settings.ids != '' and section.settings.ids != null %}
+    id="{{section.settings.ids}}"
+  {% endif %}
+>
   <div class="rich-text content-container color-{{ section.settings.color_scheme }} gradient{% if section.settings.full_width %} rich-text--full-width content-container--full-width{% endif %} section-{{ section.id }}-padding">
     <div class="rich-text__wrapper rich-text__wrapper--{{ section.settings.desktop_content_position }}{% if section.settings.full_width %} page-width{% endif %}">
       <div class="rich-text__blocks {{ section.settings.content_alignment }}">
@@ -22,7 +27,7 @@
           {%- case block.type -%}
             {%- when 'heading' -%}
               <h2
-                class="rich-text__heading rte inline-richtext {{ block.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                class="rich-text__heading rte {{ block.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
                 {{ block.shopify_attributes }}
                 {% if settings.animations_reveal_on_scroll %}
                   data-cascade
@@ -31,17 +36,17 @@
               >
                 {{ block.settings.heading }}
               </h2>
-            {%- when 'caption' -%}
-              <p
-                class="rich-text__caption {{ block.settings.text_style }} {{ block.settings.text_style }}--{{ block.settings.text_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+            {%- when 'image' -%}
+              <div
+                class="rich-text__image rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
                 {{ block.shopify_attributes }}
                 {% if settings.animations_reveal_on_scroll %}
                   data-cascade
                   style="--animation-order: {{ forloop.index }};"
                 {% endif %}
               >
-                {{ block.settings.caption | escape }}
-              </p>
+                {{ block.settings.image | image_url: width: 523 | image_tag: width: section.settings.richimg.width }}
+              </div>
             {%- when 'text' -%}
               <div
                 class="rich-text__text rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
@@ -179,13 +184,18 @@
       "unit": "px",
       "label": "t:sections.all.padding.padding_bottom",
       "default": 52
+    },
+    {
+      "type": "text",
+      "id": "ids",
+      "label": "Anchor"
     }
   ],
   "blocks": [
     {
       "type": "heading",
       "name": "t:sections.rich-text.blocks.heading.name",
-      "limit": 3,
+      "limit": 1,
       "settings": [
         {
           "type": "inline_richtext",
@@ -224,64 +234,27 @@
       ]
     },
     {
-      "type": "caption",
-      "name": "t:sections.rich-text.blocks.caption.name",
-      "limit": 3,
-      "settings": [
-        {
-          "type": "text",
-          "id": "caption",
-          "default": "t:sections.rich-text.blocks.caption.settings.text.default",
-          "label": "t:sections.rich-text.blocks.caption.settings.text.label"
-        },
-        {
-          "type": "select",
-          "id": "text_style",
-          "options": [
-            {
-              "value": "subtitle",
-              "label": "t:sections.rich-text.blocks.caption.settings.text_style.options__1.label"
-            },
-            {
-              "value": "caption-with-letter-spacing",
-              "label": "t:sections.rich-text.blocks.caption.settings.text_style.options__2.label"
-            }
-          ],
-          "default": "caption-with-letter-spacing",
-          "label": "t:sections.rich-text.blocks.caption.settings.text_style.label"
-        },
-        {
-          "type": "select",
-          "id": "text_size",
-          "options": [
-            {
-              "value": "small",
-              "label": "t:sections.rich-text.blocks.caption.settings.caption_size.options__1.label"
-            },
-            {
-              "value": "medium",
-              "label": "t:sections.rich-text.blocks.caption.settings.caption_size.options__2.label"
-            },
-            {
-              "value": "large",
-              "label": "t:sections.rich-text.blocks.caption.settings.caption_size.options__3.label"
-            }
-          ],
-          "default": "medium",
-          "label": "t:sections.rich-text.blocks.caption.settings.caption_size.label"
-        }
-      ]
-    },
-    {
       "type": "text",
       "name": "t:sections.rich-text.blocks.text.name",
-      "limit": 3,
+      "limit": 1,
       "settings": [
         {
           "type": "richtext",
           "id": "text",
           "default": "t:sections.rich-text.blocks.text.settings.text.default",
           "label": "t:sections.rich-text.blocks.text.settings.text.label"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "image",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "image"
         }
       ]
     },
@@ -340,6 +313,9 @@
         },
         {
           "type": "button"
+        },
+        {
+          "type": "image"
         }
       ]
     }

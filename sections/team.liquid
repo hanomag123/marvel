@@ -1,0 +1,154 @@
+{{ 'section-team.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="team"
+  {% if section.settings.ids != '' and section.settings.ids != null %}
+    id="{{section.settings.ids}}"
+  {% endif %}
+>
+  <div class="team-inner page-width">
+    <h2 class="team-title h1 rich-text__heading {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      {{ section.settings.title }}
+    </h2>
+    <ul class="team-list">
+      {%- for block in section.blocks -%}
+        <li class="team-item" {{ block.shopify_attributes }}>
+          <div class="team-link">
+            Meet {{ block.settings.name }}
+            <svg class="team-icon">
+              <use href="#arrow-icon">
+            </svg>
+          </div>
+          {% if block.settings.image %}
+            <div
+              class="team-image"
+            >
+              {{ block.settings.image | image_url: width: 228 | image_tag }}
+            </div>
+          {% endif %}
+          <h3 class="team-subtitle">{{ block.settings.title }}</h3>
+          <div class="team-occupation">{{ block.settings.occupation }}</div>
+          <div class="team-desc">
+            {{ block.settings.description }}
+          </div>
+          {% if block.settings.career != '' and block.settings.career != null %}
+            <div class="team-career">
+              <div class="team-subtitle-2">Career History</div>
+              <div class="team-careerlist">{{ block.settings.career }}</div>
+            </div>
+          {% endif %}
+          {% if block.settings.education != '' and block.settings.education != null %}
+            <div class="team-education">
+              <div class="team-subtitle-2">Education</div>
+              <div class="team-careerlist">{{ block.settings.education }}</div>
+            </div>
+          {% endif %}
+          <div class="team-social">
+            {% if block.settings.linkedin != '' and block.settings.linkedin != null %}
+              <a href="{{ block.settings.linkedin }}">
+                <svg>
+                  <use href="#linkedin-icon">
+                </svg>
+              </a>
+            {% endif %}
+            {% if block.settings.gmail != '' and block.settings.gmail != null %}
+              <a href="{{ block.settings.gmail }}">
+                <svg>
+                  <use href="#gmail-icon">
+                </svg>
+              </a>
+            {% endif %}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "team",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "blocks": [
+    {
+      "type": "column",
+      "name": "t:sections.multicolumn.blocks.column.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "name"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "default": "t:sections.multicolumn.blocks.column.settings.title.default",
+          "label": "t:sections.multicolumn.blocks.column.settings.title.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.multicolumn.blocks.column.settings.image.label"
+        },
+        {
+          "type": "text",
+          "id": "occupation",
+          "label": "Occupation"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "richtext",
+          "id": "career",
+          "label": "Career"
+        },
+        {
+          "type": "richtext",
+          "id": "education",
+          "label": "Education"
+        },
+        {
+          "type": "url",
+          "id": "linkedin",
+          "label": "Linkedin"
+        },
+        {
+          "type": "url",
+          "id": "gmail",
+          "label": "Gmail"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "default": "Services",
+      "label": "t:sections.multicolumn.settings.title.label"
+    },
+    {
+      "type": "text",
+      "id": "ids",
+      "label": "Anchor"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.multicolumn.presets.name",
+      "blocks": [
+        {
+          "type": "column"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
