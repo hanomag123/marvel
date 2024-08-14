@@ -15,14 +15,12 @@
   display: flex;
   justify-content: space-between;
   gap: 12.5rem;
-
-
-
 }
 
 @media (max-width: 1024px) {
   .why-wrapper {
     flex-direction: column;
+    gap: 0;
   }
 }
 
@@ -79,4 +77,12 @@
   font-size: 25px;
   line-height: 140%;
   max-width: 82.4rem;
+}
+
+@media (max-width: 1024px) {
+  .why-desc-3 {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 125%;
+  }
 }

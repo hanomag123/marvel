@@ -60,6 +60,16 @@
   padding: 0;
 }
 
+@media (max-width: 1024px) {
+  .multicolumn-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 .multicolumn-list__item:only-child {
   max-width: 72rem;
 }
@@ -74,8 +84,7 @@
 }
 
 .multicolumn.background-primary .multicolumn-card {
-  background: rgb(var(--color-background))
-    linear-gradient(rgba(var(--color-foreground), 0.04), rgba(var(--color-foreground), 0.04));
+  background: rgb(var(--color-background)) linear-gradient(rgba(var(--color-foreground), 0.04), rgba(var(--color-foreground), 0.04));
 }
 
 .multicolumn-list h3 {
@@ -93,7 +102,7 @@
   margin-right: 2.5rem;
 }
 
-.multicolumn-card__info > :nth-child(2) {
+.multicolumn-card__info> :nth-child(2) {
   margin-top: 1rem;
 }
 
@@ -105,6 +114,14 @@
 .multicolumn-list__item.center .media--adapt img {
   left: 50%;
   transform: translateX(-50%);
+}
+
+@media (max-width: 1024px) {
+  .multicolumn-list__item.center .media--adapt {
+    width: 56px;
+    height: 56px;
+    padding-bottom: 0 !important;
+  }
 }
 
 @media screen and (max-width: 749px) {
@@ -160,7 +177,7 @@
   padding-bottom: 0;
 }
 
-.background-none .multicolumn-card__image-wrapper + .multicolumn-card__info {
+.background-none .multicolumn-card__image-wrapper+.multicolumn-card__info {
   padding-top: 2.5rem;
 }
 
@@ -168,7 +185,7 @@
   padding-left: 0.5rem;
 }
 
-.background-none .slider .multicolumn-card__image-wrapper + .multicolumn-card__info {
+.background-none .slider .multicolumn-card__image-wrapper+.multicolumn-card__info {
   padding-left: 1.5rem;
 }
 
@@ -205,7 +222,7 @@
   box-sizing: border-box;
 }
 
-.multicolumn-card > .multicolumn-card__image-wrapper--full-width:not(.multicolumn-card-spacing) {
+.multicolumn-card>.multicolumn-card__image-wrapper--full-width:not(.multicolumn-card-spacing) {
   border-top-left-radius: calc(var(--text-boxes-radius) - var(--text-boxes-border-width));
   border-top-right-radius: calc(var(--text-boxes-radius) - var(--text-boxes-border-width));
   overflow: hidden;

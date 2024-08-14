@@ -309,7 +309,9 @@ h5,
 
 h1,
 .h1 {
-  font-size: calc(var(--font-heading-scale) * 3rem);
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 120%;
   text-align: left;
 }
 
@@ -324,11 +326,26 @@ h1,
   }
 }
 
+@media (max-width: 1024px) {
+
+  h1,
+  .h1 {
+    margin-bottom: 7.6rem;
+  }
+}
+
 .inline-richtext {
   font-weight: 400;
   font-size: 48px;
   line-height: 117%;
   text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .inline-richtext {
+    font-size: 32px;
+    line-height: 125%;
+  }
 }
 
 h2,
@@ -974,8 +991,8 @@ summary::-webkit-details-marker {
 
 @media screen and (max-width: 989px) {
   .grid--1-col-tablet-down .grid__item {
-    width: 100%;
-    max-width: 100%;
+    width: auto;
+    max-width: 45%;
   }
 
   .slider--tablet.grid--peek {
@@ -2364,8 +2381,7 @@ input[type='checkbox'] {
   background-color: transparent;
   position: fixed;
   top: 0;
-  left: 50%;
-  transform: translate3d(-50%, 0, 0);
+  left: 0;
   width: 100%;
   transition: background-color .3s;
 
@@ -2373,6 +2389,23 @@ input[type='checkbox'] {
 
 .header--active {
   background-color: rgb(var(--color-background));
+}
+
+.menu--active {
+  background-color: #000;
+}
+
+.menu--active .header-logo {
+  filter: invert(1);
+}
+
+.menu--active .header-links {
+  transform: translate3d(0, 0, 0);
+}
+
+.menu--active .header-button::after,
+.menu--active .header-button::before {
+  background-color: #fff;
 }
 
 
@@ -2386,6 +2419,14 @@ input[type='checkbox'] {
   grid-template-columns: 1fr 2fr 1fr;
   align-items: center;
 
+}
+
+@media (max-width: 1024px) {
+  .header {
+    grid-template-columns: 1fr 1fr;
+    height: 70px;
+    align-items: center;
+  }
 }
 
 @media screen and (max-width: 749px) {
@@ -3644,6 +3685,13 @@ details-disclosure>details {
   left: 0;
 }
 
+@media (max-width: 1024px) {
+  .services-title::after {
+    width: 65px;
+    height: 4px;
+  }
+}
+
 .services-desc {
   font-weight: 400;
   font-size: 18px;
@@ -3702,6 +3750,54 @@ details-disclosure>details {
   line-height: 140%;
 }
 
+.header-button {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .header-button {
+    display: block;
+    width: 25px;
+    height: 25px;
+    margin-left: auto;
+    border: 0;
+    background-color: transparent;
+    position: relative;
+  }
+
+  .header-button.active::before {
+    transform: translate3d(-50%, -50%, 0) rotate(-45deg);
+  }
+
+  .header-button.active::after {
+    transform: translate3d(-50%, -50%, 0) rotate(45deg);
+  }
+
+  .header-button::after,
+  .header-button::before {
+    content: '';
+    width: 100%;
+    height: 1px;
+    background-color: #000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transition: transform .3s;
+
+
+  }
+
+  .header-button::after {
+    transform: translate3d(-50%, calc(-50% + 5px), 0);
+  }
+
+  .header-button::before {
+    transform: translate3d(-50%, calc(-50% - 5px), 0);
+  }
+
+
+}
+
 .header-links ul {
   list-style-type: none;
   display: flex;
@@ -3712,7 +3808,30 @@ details-disclosure>details {
 
 @media (max-width: 1024px) {
   .header-links {
-    display: none;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100% - 70px);
+    width: 100%;
+    background-color: #fff;
+    max-height: 100%;
+    overflow: auto;
+    transform: translate3d(100%, 0, 0);
+    transition: transform .3s;
+  }
+
+  .header-links ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.6rem;
+    padding-left: 0;
+
+
   }
 }
 
@@ -3723,6 +3842,16 @@ details-disclosure>details {
   color: #000;
   text-decoration: none;
   transition: color .3s;
+}
+
+@media (max-width: 1024px) {
+  .header-links a {
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 120%;
+    text-align: center;
+    font-family: var(--font-heading-family);
+  }
 }
 
 .header-links a:hover {
@@ -3809,4 +3938,8 @@ details-disclosure>details {
   #navLinks {
     display: none;
   }
+}
+
+.header-link {
+  display: flex;
 }

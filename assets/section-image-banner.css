@@ -81,6 +81,12 @@
   }
 }
 
+@media (max-width: 1024px) {
+  .banner--large {
+    min-height: 533px;
+  }
+}
+
 @media screen and (min-width: 750px) {
   .banner {
     flex-direction: row;

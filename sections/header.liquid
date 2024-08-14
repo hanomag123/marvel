@@ -8,14 +8,6 @@
   onload="this.media='all'"
 >
 
-{%- if settings.predictive_search_enabled -%}
-  <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
-{%- endif -%}
-
-{%- if section.settings.menu_type_desktop == 'mega' -%}
-  <link rel="stylesheet" href="{{ 'component-mega-menu.css' | asset_url }}" media="print" onload="this.media='all'">
-{%- endif -%}
-
 <style>
   header-drawer {
     justify-self: start;
@@ -91,6 +83,13 @@
   .header-logo {
     width: 14.6rem;
     height: 5.5rem;
+  }
+
+  @media (max-width: 1024px) {
+    .header-logo {
+      width: 10rem;
+      height: 3.8rem;
+    }
   }
 
   @media screen and (min-width: 750px) {
@@ -182,14 +181,14 @@
   <header class="header header--{{ section.settings.logo_position }} header--mobile-{{ section.settings.mobile_logo_position }} page-width{% if section.settings.menu_type_desktop == 'drawer' %} drawer-menu{% endif %}{% if section.settings.menu != blank %} header--has-menu{% endif %}{% if has_app_block %} header--has-app{% endif %}{% if social_links %} header--has-social{% endif %}{% if shop.customer_accounts_enabled %} header--has-account{% endif %}{% if localization_forms %} header--has-localizations{% endif %}">
     {%- if section.settings.logo_position != 'middle-center' -%}
       {%- if request.page_type == 'index' -%}
-        <a href="#">
+        <a href="#" class="header-link">
           <svg class="header-logo">
             <use href='#header-logo'></use>
           </svg>
         </a>
       {%- endif -%}
     {%- endif -%}
-
+    <button class="header-button"></button>
     <div class="header-links">{{ section.settings.links }}</div>
 
     {%- if section.settings.logo_position == 'middle-center' -%}

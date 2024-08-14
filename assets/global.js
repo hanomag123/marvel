@@ -106,6 +106,14 @@ if (header) {
 
     navLinks.appendChild(fragment);
   }
+
+  const headerBtn = header.querySelector('.header-button');
+  if (headerBtn) {
+    headerBtn.addEventListener('click', function () {
+      this.classList.toggle('active');
+      header.classList.toggle('menu--active');
+    });
+  }
 }
 
 function getFocusableElements(container) {
