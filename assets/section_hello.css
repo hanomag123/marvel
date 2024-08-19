@@ -1,0 +1,12 @@
+.hello {
+    display: flex;
+    color: red;
+    background-color: blue;
+}
+
+@media (max-width: 1024px) {
+    .hello {
+        display: none;
+        background-color: red;
+    }
+}

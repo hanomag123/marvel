@@ -1,0 +1,14 @@
+@import "vendor/vars";
+@import "vendor/mixins";
+
+$red: red;
+$blue: blue;
+.hello {
+  display: flex;
+  color: $red;
+  background-color: $blue;
+  @include breakpoint($xl-bp) {
+    display: none;
+    background-color: red;
+  } 
+}

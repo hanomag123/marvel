@@ -1,0 +1,12 @@
+{{ 'section-hello.css' | asset_url | stylesheet_tag }}
+{% schema %}
+{
+  "name": "hello",
+  "tag": "section",
+  "class": "",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": []
+}
+{% endschema %}
